@@ -2,7 +2,7 @@ import json
 from aiogram import F
 from aiogram.enums import ParseMode
 from aiogrambot.base.TakeInfoBase import TakeInfo
-from aiogrambot.handlers.requests.ParseHTML.ParseRuTube import Parse
+from aiogrambot.handlers.Requests.ParseHTML.ParseRuTube import Parse
 from aiogrambot.handlers.start_command import MainMenu
 from aiogrambot.logs import logger
 from aiogrambot.main import bot
@@ -244,15 +244,6 @@ def register_handlers(dp):
                                     message_id=query.message.message_id,
                                     parse_mode=ParseMode.MARKDOWN)
 
-        # Добавление в JSON Запроса
-        data = {'user_id': []}
-        data['user_id'].append({
-            'ID': user_id,
-            'titles': titles_str
-        })
-        with open("Parse.Logs.JSON", "w", encoding="utf-8") as out:
-            json.dump(data, out, indent=4, ensure_ascii=False)
-
     @dp.callback_query(lambda query: query.data.endswith("_views_request"))
     async def views_request(query: CallbackQuery):
         user_id = query.from_user.id
@@ -268,15 +259,6 @@ def register_handlers(dp):
                                     chat_id=query.message.chat.id,
                                     message_id=query.message.message_id,
                                     parse_mode=ParseMode.MARKDOWN)
-
-        # Добавление в JSON Запроса
-        data = {'user_id': []}
-        data['user_id'].append({
-            'ID': user_id,
-            'views': views
-        })
-        with open("Parse.Logs.JSON", "w", encoding="utf-8") as out:
-            json.dump(data, out, indent=4, ensure_ascii=False)
 
     @dp.callback_query(lambda query: query.data.endswith("_links_request"))
     async def links_request(query: CallbackQuery):
@@ -294,15 +276,6 @@ def register_handlers(dp):
                                     message_id=query.message.message_id,
                                     parse_mode=ParseMode.MARKDOWN)
 
-        # Добавление в JSON Запроса
-        data = {'user_id': []}
-        data['user_id'].append({
-            'ID': user_id,
-            'links': links_str
-        })
-        with open("Parse.Logs.JSON", "w", encoding="utf-8") as out:
-            json.dump(data, out, indent=4, ensure_ascii=False)
-
     @dp.callback_query(lambda query: query.data.endswith("_description_request"))
     async def description_request(query: CallbackQuery):
         user_id = query.from_user.id
@@ -318,15 +291,6 @@ def register_handlers(dp):
                                     chat_id=query.message.chat.id,
                                     message_id=query.message.message_id,
                                     parse_mode=ParseMode.MARKDOWN)
-
-        # Добавление в JSON Запроса
-        data = {'user_id': []}
-        data['user_id'].append({
-            'ID': user_id,
-            'description': description_str
-        })
-        with open("Parse.Logs.JSON", "w", encoding="utf-8") as out:
-            json.dump(data, out, indent=4, ensure_ascii=False)
 
     @dp.callback_query(lambda query: query.data == "back_to_menu_requests")
     async def menu_request(query: CallbackQuery):
